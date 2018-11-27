@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   planetsDataModel.bindEvents();
   const planetMenuView = new PlanetMenuView();
   planetMenuView.bindEvents();
-
+  const planetInfoView = new PlanetInfoView();
+  planetInfoView.bindEvents();
 
 });

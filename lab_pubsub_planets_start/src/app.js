@@ -7,6 +7,9 @@ const PlanetMenuView = require('./views/planet_menu_view.js')
 document.addEventListener('DOMContentLoaded', () => {
   const planetsDataModel = new SolarSystem(planetsData);
   console.log(planetsDataModel.planets);
+  planetsDataModel.bindEvents();
   const planetMenuView = new PlanetMenuView();
   planetMenuView.bindEvents();
+
+
 });

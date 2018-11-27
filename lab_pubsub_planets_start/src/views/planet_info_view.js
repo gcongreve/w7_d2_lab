@@ -36,6 +36,8 @@ PlanetInfoView.prototype.displayInfo = function (planet) {
   gravity.textContent = `Gravity: ${planet.gravity}g`;
   const moons = document.createElement("p");
   moons.textContent = `Moons: ${planet.moons}`;
+  const planetImage = document.createElement("img")
+  planetImage.src = `images/${planet.name}.jpg`
 
   infoSection.appendChild(day);
   infoSection.appendChild(orbit);
@@ -43,6 +45,7 @@ PlanetInfoView.prototype.displayInfo = function (planet) {
   infoSection.appendChild(volume);
   infoSection.appendChild(gravity);
   infoSection.appendChild(moons);
+  infoSection.appendChild(planetImage);
 
 };
 

@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* border: 1px dotted black; */
 };
 
 html {
@@ -10,11 +11,25 @@ html {
 
 body {
   display: flex;
+  align-content: stretch;
+  align-items: stretch;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
+header {
+  width: 100%;
+}
 content {
+  width: 100%;
   display: grid;
-  grid-template-columns: 2fr 8fr;
+  grid-template-columns: 1fr 3fr;
+}
+
+.planets-menu a {
+  display: block;
+}
+
+.page-title {
+  text-align: center;
 }

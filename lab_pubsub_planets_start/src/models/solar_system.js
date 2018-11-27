@@ -5,13 +5,14 @@ const SolarSystem = function(planets) {
 };
 
 SolarSystem.prototype.bindEvents = function () {
-  debugger;
   PubSub.subscribe("PlanetMenuView:selected-planet", (event) => {
     const seletedPlanet = event.detail;
     const planetDetails = this.planets.find((planet) => {
       return planet.name === seletedPlanet;
     }); console.log(planetDetails);
-  })
+    PubSub.publish("SolarSystem:selected-planet", planetDetails)
+  });
+
 };
 
 

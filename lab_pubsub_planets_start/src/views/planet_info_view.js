@@ -6,8 +6,16 @@ const PlanetInfoView = function () {
 
 PlanetInfoView.prototype.bindEvents = function () {
   PubSub.subscribe("SolarSystem:selected-planet", (planet) => {
+    this.clearDisplay()
     this.displayInfo(planet.detail);
   })
+};
+
+PlanetInfoView.prototype.clearDisplay = function () {
+  const infoSection = document.querySelector('.planet-details');
+  while(infoSection.hasChildNodes()) {
+      infoSection.removeChild(infoSection.firstChild);
+  }
 };
 
 PlanetInfoView.prototype.displayInfo = function (planet) {

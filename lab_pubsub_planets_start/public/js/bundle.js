@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const planetsData = __webpack_require__(/*! ./data/planets.js */ \"./src/data/planets.js\");\nconst SolarSystem = __webpack_require__(/*! ./models/solar_system.js */ \"./src/models/solar_system.js\");\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  const planetsDataModel = new SolarSystem(planetsData);\n  console.log(planetsDataModel.planets);\n});\n\n\n//# sourceURL=webpack:///./src/app.js?");
+eval("const planetsData = __webpack_require__(/*! ./data/planets.js */ \"./src/data/planets.js\");\nconst SolarSystem = __webpack_require__(/*! ./models/solar_system.js */ \"./src/models/solar_system.js\");\nconst PlanetInfoView = __webpack_require__(/*! ./views/planet_info_view.js */ \"./src/views/planet_info_view.js\")\nconst PlanetMenuView = __webpack_require__(/*! ./views/planet_menu_view.js */ \"./src/views/planet_menu_view.js\")\n\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  const planetsDataModel = new SolarSystem(planetsData);\n  console.log(planetsDataModel.planets);\n  const planetMenuView = new PlanetMenuView();\n  planetMenuView.bindEvents();\n});\n\n\n//# sourceURL=webpack:///./src/app.js?");
 
 /***/ }),
 
@@ -108,6 +108,17 @@ eval("const planets = [\n  {\n    name: 'Mercury',\n    orbit: 87.969,\n    day:
 
 /***/ }),
 
+/***/ "./src/helpers/pub_sub.js":
+/*!********************************!*\
+  !*** ./src/helpers/pub_sub.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("// these are like Ruby class (self.X) methods\n\nconst PubSub = {\n  publish : function(channel, payload){\n    const event = new CustomEvent(channel, { detail: payload } );\n    console.log(`New event on ${channel} : ${ payload }`);\n    document.dispatchEvent(event);\n  },\n  subscribe: function(channel, callback){\n    console.log(`New event on ${channel}`);\n    document.addEventListener(channel, callback);\n  }\n};\n\nmodule.exports = PubSub;\n\n\n//# sourceURL=webpack:///./src/helpers/pub_sub.js?");
+
+/***/ }),
+
 /***/ "./src/models/solar_system.js":
 /*!************************************!*\
   !*** ./src/models/solar_system.js ***!
@@ -116,6 +127,28 @@ eval("const planets = [\n  {\n    name: 'Mercury',\n    orbit: 87.969,\n    day:
 /***/ (function(module, exports) {
 
 eval("const SolarSystem = function(planets) {\n  this.planets = planets;\n};\n\nmodule.exports = SolarSystem;\n\n\n//# sourceURL=webpack:///./src/models/solar_system.js?");
+
+/***/ }),
+
+/***/ "./src/views/planet_info_view.js":
+/*!***************************************!*\
+  !*** ./src/views/planet_info_view.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("\n\n//# sourceURL=webpack:///./src/views/planet_info_view.js?");
+
+/***/ }),
+
+/***/ "./src/views/planet_menu_view.js":
+/*!***************************************!*\
+  !*** ./src/views/planet_menu_view.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("const PubSub = __webpack_require__(/*! ../helpers/pub_sub.js */ \"./src/helpers/pub_sub.js\");\n\nconst PlanetMenuView = function () {\n\n};\n\nPlanetMenuView.prototype.bindEvents = function () {\n  const planetMenu = document.querySelector('.planets-menu');\n  planetMenu.addEventListener('click', (event) => {\n    event.preventDefault();\n    const planetClicked = event.target.getAttribute(\"id\");\n    PubSub.publish(\"PlanetMenuView:selected-planet\", planetClicked);\n  })\n};\n\nmodule.exports = PlanetMenuView;\n\n\n//# sourceURL=webpack:///./src/views/planet_menu_view.js?");
 
 /***/ })
 
